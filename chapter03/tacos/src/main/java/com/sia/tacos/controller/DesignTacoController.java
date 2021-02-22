@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.sia.tacos.domain.Ingredient;
-import com.sia.tacos.domain.Taco;
-import com.sia.tacos.domain.Ingredient.Type;
+import com.sia.tacos.entity.Ingredient;
+import com.sia.tacos.entity.Taco;
+import com.sia.tacos.entity.Ingredient.Type;
 import com.sia.tacos.repository.IngredientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

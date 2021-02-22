@@ -1,4 +1,4 @@
-package com.sia.tacos.domain;
+package com.sia.tacos.entity;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

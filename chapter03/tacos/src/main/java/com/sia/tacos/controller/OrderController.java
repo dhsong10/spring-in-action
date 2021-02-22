@@ -2,7 +2,7 @@ package com.sia.tacos.controller;
 
 import javax.validation.Valid;
 
-import com.sia.tacos.domain.Order;
+import com.sia.tacos.entity.Order;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
