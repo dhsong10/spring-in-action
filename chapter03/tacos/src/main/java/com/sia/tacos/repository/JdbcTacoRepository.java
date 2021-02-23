@@ -3,6 +3,7 @@ package com.sia.tacos.repository;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Arrays;
+import java.util.Date;
 
 import com.sia.tacos.entity.Ingredient;
 import com.sia.tacos.entity.Taco;
@@ -37,17 +38,21 @@ public class JdbcTacoRepository implements TacoRepository {
     }
 
     private long saveTacoInfo(Taco taco) {
-        PreparedStatementCreator preparedStatementCreator =
-            new PreparedStatementCreatorFactory("INSERT INTO Taco (name, createdAt) VALUES (?, ?)", Types.VARCHAR, Types.TIMESTAMP)
-            .newPreparedStatementCreator(Arrays.asList(taco.getName(), new Timestamp(taco.getCreatedAt().getTime())));
+        taco.setCreatedAt(new Date());
+        
+        PreparedStatementCreatorFactory factory = new PreparedStatementCreatorFactory("INSERT INTO Taco (name, createdAt) VALUES (?, ?)", Types.VARCHAR, Types.TIMESTAMP);
+        factory.setReturnGeneratedKeys(true);
 
+        PreparedStatementCreator creator = factory.newPreparedStatementCreator(Arrays.asList(taco.getName(), new Timestamp(taco.getCreatedAt().getTime())));
+
+        
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(preparedStatementCreator, keyHolder);
+        jdbcTemplate.update(creator, keyHolder);
 
         return keyHolder.getKey().longValue();
     }
 
     private void saveIngredientToTaco(Ingredient ingredient, Taco taco) {
-        jdbcTemplate.update("INSERT INTO Taco_Ingredients (taco, ingredient) VALUES (?, ?)", Arrays.asList(taco.getId(), ingredient.getId()));
+        jdbcTemplate.update("INSERT INTO Taco_Ingredients (taco, ingredient) VALUES (?, ?)", taco.getId(), ingredient.getId());
     }    
 }

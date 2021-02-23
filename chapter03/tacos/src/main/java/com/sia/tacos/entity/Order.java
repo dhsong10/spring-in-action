@@ -15,7 +15,6 @@ import lombok.Data;
 
 @Data
 public class Order {
-    @NotNull
     private Long id;
 
     @NotBlank(message = "Name is required")
