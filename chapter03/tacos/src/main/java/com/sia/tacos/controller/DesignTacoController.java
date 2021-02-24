@@ -1,8 +1,6 @@
 package com.sia.tacos.controller;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,13 +34,11 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
     private TacoRepository tacoRepository;
-    private IngredientByIdConverter converter;
 
     @Autowired
     public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository, IngredientByIdConverter converter) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
-        this.converter = converter;
     }
 
     @ModelAttribute(value = "taco")
