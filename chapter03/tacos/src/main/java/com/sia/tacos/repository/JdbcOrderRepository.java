@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class JdbcOrderRepository implements OrderRepository {
+public class JdbcOrderRepository {
 
     private SimpleJdbcInsert orderInserter;
     private SimpleJdbcInsert orderTacoInserter;
@@ -34,7 +34,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
 
-	@Override
+	// @Override
 	public Order save(Order order) {
         order.setPlacedAt(new Date());
 

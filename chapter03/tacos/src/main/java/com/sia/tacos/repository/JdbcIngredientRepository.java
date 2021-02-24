@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class JdbcIngredientRepository implements IngredientRepository {
+public class JdbcIngredientRepository {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -20,17 +20,17 @@ public class JdbcIngredientRepository implements IngredientRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
+    // @Override
     public Iterable<Ingredient> findAll() {
         return jdbcTemplate.query("SELECT id, name, type FROM Ingredient", this::mapRowToIngredient);
     }
 
-    @Override
+    // @Override
     public Ingredient findById(String id) {
         return jdbcTemplate.queryForObject("SELECT id, name, type FROM Ingredient WHERE id=?", this::mapRowToIngredient, id);
     }
 
-    @Override
+    // @Override
     public Ingredient save(Ingredient ingredient) {
         jdbcTemplate.update("INSERT INTO Ingredient (id, name, type) VALUES (?, ?, ?)", Arrays.asList(ingredient.getId(), ingredient.getName(), ingredient.getType().toString()));
         return ingredient;

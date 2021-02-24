@@ -1,5 +1,7 @@
 package com.sia.tacos.converter;
 
+import java.util.Optional;
+
 import com.sia.tacos.entity.Ingredient;
 import com.sia.tacos.repository.IngredientRepository;
 
@@ -18,8 +20,9 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
     }
 
     @Override
-    public Ingredient convert(String source) {
-        return ingredientRepository.findById(source);
+    public Ingredient convert(String id) {
+        Optional<Ingredient> optionalIngredient = ingredientRepository.findById(id);
+        return optionalIngredient.isPresent() ? optionalIngredient.get() : null;
     }
     
 }
