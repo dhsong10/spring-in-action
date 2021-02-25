@@ -1,6 +1,5 @@
 package com.sia.tacos.repository;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class JdbcOrderRepository implements OrderRepository {
+public class JdbcOrderRepository {
 
     private SimpleJdbcInsert orderInserter;
     private SimpleJdbcInsert orderTacoInserter;
@@ -35,7 +34,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
 
-	@Override
+	// @Override
 	public Order save(Order order) {
         order.setPlacedAt(new Date());
 
