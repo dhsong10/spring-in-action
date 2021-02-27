@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-import javassist.SerialVersionUID;
 import lombok.Data;
 
 @Data
@@ -20,7 +19,7 @@ import lombok.Data;
 @Table(name = "TacoOrder")
 public class Order implements Serializable {
 
-    private static final long SerialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
