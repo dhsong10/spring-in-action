@@ -5,8 +5,8 @@ VALUES
     ('COTO',    'Corn Tortilla',    'WRAP'),
     ('GRBF',    'Ground Beef',      'PROTEIN'),
     ('CARN',    'Carnitas',         'PROTEIN'),
-    ('TMTO',    'Dices Tomatoes',   'WRAP'),
-    ('LETC',    'Lettuce',          'WRAP'),
+    ('TMTO',    'Diced Tomatoes',   'VEGGIES'),
+    ('LETC',    'Lettuce',          'VEGGIES'),
     ('CHED',    'Cheddar',          'CHEESE'),
     ('JACK',    'Monterrey Jack',   'CHEESE'),
     ('SLSA',    'Salsa',            'SAUCE'),
@@ -14,8 +14,8 @@ VALUES
 
 DELETE FROM Taco;
 
-DELETE FROM TacoOrder;
+DELETE FROM Taco_Order;
 
-DELETE FROM Taco_Ingredient;
+DELETE FROM Taco_Ingredients;
 
-DELETE FROM TacoOrder_Taco;
+DELETE FROM Taco_Order_Tacos;
