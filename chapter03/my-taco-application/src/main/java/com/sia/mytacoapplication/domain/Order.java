@@ -47,9 +47,6 @@ public class Order implements Serializable {
 
     public void addTaco(Taco taco) {
         log.info(taco.toString());
-        if (this.tacos == null) {
-            this.tacos = new ArrayList<>();
-        }
         log.info(tacos.toString());
         this.tacos.add(taco);
     } 

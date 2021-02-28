@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,11 +34,13 @@ public class OrderController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processOrser(Order order) {
+    public String processOrser(Order order, SessionStatus sessionStatus) {
 
         log.info(order.toString());
 
         orderRepository.save(order);
+
+        sessionStatus.setComplete();
 
         return "redirect:/";
 
