@@ -1,6 +1,7 @@
 package com.sia.mytacoapplication.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +14,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @Entity
-@Table(name = "TacoOrder")
+@Table(name = "Taco_Order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,10 +38,16 @@ public class Order implements Serializable {
     private Date placedAt;
 
     @ManyToMany(targetEntity = Taco.class)
-    private List<Taco> tacos;
+    private List<Taco> tacos = new ArrayList<>();
 
     @PrePersist
     void placedAt() {
         this.placedAt = new Date();
     }
+
+    public void addTaco(Taco taco) {
+        log.info(taco.toString());
+        log.info(tacos.toString());
+        this.tacos.add(taco);
+    } 
 }

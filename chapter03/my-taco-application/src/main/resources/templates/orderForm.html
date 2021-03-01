@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <title>My Taco Application</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h3 class="text-center my-5">Order your taco creations! <small class="text-muted">My Taco Application</small></h3>
+    <div class="text-center">
+      <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud.png" class="img-fluid">
+      <a th:href="@{/design}" class="link-primary">Desing another taco</a>
+    </div>
+    <ul>
+      <li th:each="taco : ${order.tacos}">
+        <span th:text="${taco.name}"></span>
+      </li>
+    </ul>
+
+    <form class="my-5" method="POST" th:action="@{/orders}" th:object="${order}">
+      <h3>Deliver y taco masterpieces to...</h3>
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="deliveryName">Name</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="deliveryName" id="deliveryName" th:field="*{deliveryName}">
+        </div>
+      </div>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="deliveryStreet">Street address:</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="deliveryStreet" id="deliveryStreet" th:field="*{deliveryStreet}">
+        </div>
+      </div>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="deliveryCity">City:</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="deliveryCity" id="deliveryCity" th:field="*{deliveryCity}">
+        </div>
+      </div>
+
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="deliveryState">State:</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="deliveryState" id="deliveryState" th:field="*{deliveryState}">
+        </div>
+      </div>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="deliveryZip">Zip code:</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="deliveryZip" id="deliveryZip" th:field="*{deliveryZip}">
+        </div>
+      </div>
+
+      <hr>
+
+      <h3>Here's how I'll pay</h3>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="ccNumber">Credit Card #:</label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="ccNumber" id="ccNumber" th:field="*{ccNumber}">
+        </div>
+      </div>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="ccExpiration">Expiration: </label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="ccExpiration" id="ccExpiration" th:field="*{ccExpiration}">
+        </div>
+      </div>
+
+      <div class="row align-items-center my-3">
+        <div class="col-md-4">
+          <label class="col-form-label" for="ccCVV">CVV: </label>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="ccCVV" id="ccCVV" th:field="*{ccCVV}">
+        </div>
+      </div>
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-outline-primary btn-sm">Submit order</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

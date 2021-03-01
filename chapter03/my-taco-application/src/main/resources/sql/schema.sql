@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS Taco(
     createdAt       TIMESTAMP       NOT NULL
 );
 
-DROP TABLE IF EXISTS TacoOrder;
-CREATE TABLE IF NOT EXISTS TacoOrder(
+DROP TABLE IF EXISTS Taco_Order;
+CREATE TABLE IF NOT EXISTS Taco_Order(
     id              IDENTITY,
     deliveryName    VARCHAR(50)     NOT NULL,
     deliveryStreet  VARCHAR(50)     NOT NULL,
@@ -26,22 +26,22 @@ CREATE TABLE IF NOT EXISTS TacoOrder(
     plactedAt       TIMESTAMP       NOT NULL
 );
 
-DROP TABLE IF EXISTS Taco_Ingredient;
-CREATE TABLE IF NOT EXISTS Taco_Ingredient(
+DROP TABLE IF EXISTS Taco_Ingredients;
+CREATE TABLE IF NOT EXISTS Taco_Ingredients(
     tacoId          BIGINT          NOT NULL,
     ingredientId    VARCHAR(4)      NOT NULL
 );
-ALTER TABLE Taco_Ingredient
+ALTER TABLE Taco_Ingredients
     ADD FOREIGN KEY (tacoId) REFERENCES Taco(id);
-ALTER TABLE Taco_Ingredient
+ALTER TABLE Taco_Ingredients
     ADD FOREIGN Key (ingredientId) REFERENCES Ingredient(id);
 
-DROP TABLE IF EXISTS TacoOrder_Taco;
-CREATE TABLE IF NOT EXISTS TacoOrder_Taco(
+DROP TABLE IF EXISTS Taco_Order_Tacos;
+CREATE TABLE IF NOT EXISTS Taco_Order_Tacos(
     orderId         BIGINT          NOT NULL,
     tacoId          BIGINT          NOT NULL
 );
-ALTER TABLE TacoOrder_Taco
-    ADD FOREIGN KEY (orderId) REFERENCES TacoOrder(id);
-ALTER TABLE TacoOrder_Taco
+ALTER TABLE Taco_Order_Tacos
+    ADD FOREIGN KEY (orderId) REFERENCES Taco_Order(id);
+ALTER TABLE Taco_Order_Tacos
     ADD FOREIGN KEY (tacoId) REFERENCES Taco(id);
