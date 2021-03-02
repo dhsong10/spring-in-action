@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -30,11 +28,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //         .withUser("user2").password(passwordEncoder().encode("password2")).authorities("ROLE_USER");
 
         // JDBC Authentication
-        auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .usersByUsernameQuery("SELECT username, password, enabled FROM Users WHERE username = ?")
-            .authoritiesByUsernameQuery("SELECT username, authority FROM Authorities WHERE username = ?")
-            .passwordEncoder(passwordEncoder());
+        // auth.jdbcAuthentication()
+        //     .dataSource(dataSource)
+        //     .usersByUsernameQuery("SELECT username, password, enabled FROM Users WHERE username = ?")
+        //     .authoritiesByUsernameQuery("SELECT username, authority FROM Authorities WHERE username = ?")
+        //     .passwordEncoder(passwordEncoder());
+
+        // LDAP Authentication
+        auth.ldapAuthentication()
+            .userSearchBase("ou=people")
+            .userSearchFilter("(uid={0})")
+            .groupSearchBase("ou=groups")
+            .groupSearchFilter("(member={0})")
+            .contextSource()
+            .root("dc=tacocloud,dc=com")
+            .ldif("classpath:auth/users.ldif")
+            .and()
+            .passwordCompare()
+            .passwordEncoder(passwordEncoder())
+            .passwordAttribute("userPassword");
     }
 
     @Override
