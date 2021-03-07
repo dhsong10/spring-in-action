@@ -17,6 +17,12 @@
         <div class="text-center">
           <h3>Welcome to...</h3>
           <img th:src="@{/images/TacoCloud.png}" alt="TacoCloud.png">
+
+          <form method="POST" th:action="@{/logout}">
+            <input type="submit" value="LOGOUT">
+          </form>
+
+          <a th:href="@{/design}">Design a taco</a>
         </div>
       </header>
     </div>

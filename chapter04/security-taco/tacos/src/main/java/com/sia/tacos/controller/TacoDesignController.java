@@ -1,14 +1,17 @@
 package com.sia.tacos.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.sia.tacos.domain.Ingredient;
 import com.sia.tacos.domain.Order;
 import com.sia.tacos.domain.Taco;
+import com.sia.tacos.domain.User;
 import com.sia.tacos.domain.Ingredient.Type;
 import com.sia.tacos.repository.IngredientRepository;
 import com.sia.tacos.repository.TacoRepository;
+import com.sia.tacos.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,7 @@ public class TacoDesignController {
     
     private IngredientRepository ingredientRepository;
     private TacoRepository tacoRepository;
+    private UserRepository userRepository;
 
     @ModelAttribute("order")
     public Order order() {
@@ -40,15 +44,20 @@ public class TacoDesignController {
     }
 
     @Autowired
-    public TacoDesignController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
+    public TacoDesignController(IngredientRepository ingredientRepository, TacoRepository tacoRepository, UserRepository userRepository) {
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String design(Model model) {
+    public String design(Model model, Principal principal) {
 
         addIngredientsToModel(model);
+
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("user", user);
 
         return "design";
     }
